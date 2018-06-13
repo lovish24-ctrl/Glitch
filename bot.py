@@ -125,6 +125,17 @@ async def _eval(ctx, *, body):
     else:
         await ctx.message.add_reaction('\u2705')
 	
+@bot.command()
+async def ping(ctx):
+    '''Ping the bot'''
+    t1 = ctx.message.created_at
+    m = await ctx.send('**Pong!**')
+    time = (m.created_at - t1).total_seconds() * 1000
+    await m.edit(content='**Pong!  Took: {}ms**'.format(int(time)))
+
+	
+	
+	
 	
 
 bot.run(os.environ.get("TOKEN"))
