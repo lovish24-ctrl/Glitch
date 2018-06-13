@@ -12,7 +12,7 @@ class mod:
 
     @commands.command()
     @commands.has_permissions(kick_members = True)
-    async def mute(self, ctx, user, time = None):
+    async def mute(self, ctx, user : discord.User, time = None):
         if time != None:
             time = int(time)
             t = time * 60
@@ -26,7 +26,7 @@ class mod:
     @commands.command()
     @commands.has_permissions(ban_members=True)
     async def unmute(self, ctx, user: discord.Member):
-        '''Allows someone to un-shut up. Usage: *unmute [user]'''
+        '''Unmute someone'''
         await ctx.channel.set_permissions(user, send_messages=True)   
         ctx.send(f"Done, {user.mention} is unmuted") 
 
@@ -76,7 +76,7 @@ class mod:
 
     @commands.command()
     @commands.has_permissions(ban_members = True)
-    async def ban(self, ctx, user, *, reason = None):
+    async def ban(self, ctx, user : discord.User, *, reason = None):
         if reason != None:
             await ctx.send(f"Done, {user} is banned, reason = {reason} ")
             embed=discord.Embed(title=f"Banned From **{ctx.author.guild.name}**", color=0xf52338)
