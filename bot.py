@@ -14,6 +14,7 @@ bot.load_extension("cogs.utility")
 bot.load_extension("cogs.mod")
 bot._last_result = None
 
+
 def dev_check(id):
     with open('data/devs.json') as f:
         devs = json.load(f)
@@ -27,6 +28,8 @@ async def on_ready():
 	print('Logged in as'+ bot.user.name)
 	print(bot.user.id)
 	print('------')
+	await bot.change_presence(activity=discord.Game(name=os.environ.get('STATUS')))
+
 
 
 
