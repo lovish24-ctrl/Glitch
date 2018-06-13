@@ -4,7 +4,7 @@ import asyncio
 
  
  
-class utility:
+class mod:
     def __init__(self, bot):
         self.bot = bot
  
