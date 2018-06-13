@@ -3,10 +3,11 @@ from discord.ext import commands
 import time
 import os
 import inspect
+import json
+from contextlib import redirect_stdout
 import io
 import textwrap
-
-
+import traceback
 
 bot = commands.Bot(command_prefix='e.', description="An easy to use discord bot")
 bot.load_extension("cogs.fun")
