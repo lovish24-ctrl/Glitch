@@ -14,6 +14,15 @@ bot.load_extension("cogs.utility")
 bot.load_extension("cogs.mod")
 bot._last_result = None
 
+def cleanup_code(content):
+    '''Automatically removes code blocks from the code.'''
+    # remove ```py\n```
+    if content.startswith('```') and content.endswith('```'):
+        return '\n'.join(content.split('\n')[1:-1])
+
+    return content.strip('` \n')
+     
+
 
 def dev_check(id):
     with open('data/devs.json') as f:
