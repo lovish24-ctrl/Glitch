@@ -25,7 +25,7 @@ def dev_check(id):
 
 @bot.event
 async def on_ready():
-	print('Logged in as'+ bot.user.name)
+	print('Logged in as '+ bot.user.name)
 	print(bot.user.id)
 	print('------')
 	await bot.change_presence(activity=discord.Game(name=os.environ.get('STATUS')))
