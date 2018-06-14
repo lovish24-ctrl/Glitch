@@ -8,12 +8,14 @@ from contextlib import redirect_stdout
 import io
 import textwrap
 import traceback
+import aiohttp
 
 bot = commands.Bot(command_prefix='e.', description="An easy to use discord bot")
 bot.load_extension("cogs.fun")
 bot.load_extension("cogs.utility")
 bot.load_extension("cogs.mod")
 bot._last_result = None
+bot.session = aiohttp.ClientSession(loop=bot.loop)
 
 def cleanup_code(content):
     '''Automatically removes code blocks from the code.'''
