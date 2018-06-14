@@ -35,10 +35,10 @@ class utility:
 		
 	@commands.command()
 	async def avatar(self, ctx, user: discord.Member = None):
-        """Gets a avatar"""
-        if user == None:
-		user = ctx.author
-	await ctx.send(user.avatar_url)
+		"""Gets a avatar"""
+		if user == None:
+			user = ctx.author
+		await ctx.send(user.avatar_url)
 
 
 
