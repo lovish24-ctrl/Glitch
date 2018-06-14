@@ -8,13 +8,36 @@ from contextlib import redirect_stdout
 import io
 import textwrap
 import traceback
+import aiohttp
+from motor.motor_asyncio import AsyncIOMotorClient
 
-bot = commands.Bot(command_prefix='e.', description="An easy to use discord bot")
+
+client = AsyncIOMotorClient(os.environ.get("MONGOURL"))
+db = client.discordbot2001
+
+
+async def guildpre(bot, message):
+    '''Get the prefix for required guild'''
+    f = await bot.db.config.find_one({"gid" : message.guild.id})
+    if f is None:
+       	return "e."
+    else:
+        f = f['prefix']
+        return f
+
+bot = commands.Bot(command_prefix=guildpre, description="An easy to use discord bot")
 bot.load_extension("cogs.fun")
 bot.load_extension("cogs.utility")
 bot.load_extension("cogs.mod")
 bot.load_extension("cogs.Music")
 bot._last_result = None
+bot.session = aiohttp.ClientSession(loop=bot.loop)
+bot.db = db
+
+
+
+
+
 
 def cleanup_code(content):
     '''Automatically removes code blocks from the code.'''
@@ -39,7 +62,7 @@ async def on_ready():
 	print('Logged in as '+ bot.user.name)
 	print(bot.user.id)
 	print('------')
-	await bot.change_presence(activity=discord.Game(name=os.environ.get('STATUS')))
+	await bot.change_presence(status = discord.Status.idle, activity=discord.Game(name=os.environ.get('ACTIVITY')))
 
 
 
@@ -125,6 +148,17 @@ async def _eval(ctx, *, body):
         await ctx.message.add_reaction('\u2049')  # x
     else:
         await ctx.message.add_reaction('\u2705')
+	
+@bot.command()
+async def ping(ctx):
+    '''Ping the bot'''
+    t1 = ctx.message.created_at
+    m = await ctx.send('**Pong!**')
+    time = (m.created_at - t1).total_seconds() * 1000
+    await m.edit(content='**Pong!  Took: {}ms**'.format(int(time)))
+
+	
+	
 	
 	
 

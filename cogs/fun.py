@@ -3,6 +3,7 @@ import random
 import asyncio
 import json
 from discord.ext import commands
+import aiohttp
 
 
 
@@ -177,26 +178,7 @@ class fun:
             await ctx.send(ctx.message.author.mention + " You are " + str(random.randint(1,101)) + "% gay.")
 
 
-    @commands.command()
-    async def hack(self, ctx, user: discord.Member):
-        """Hack someone's account! Try it!"""
-        msg = await ctx.send(f"Hacking! Target: {user}")
-        await asyncio.sleep(2)
-        await msg.edit(content="Accessing Discord Files... [▓▓    ]")
-        await asyncio.sleep(2)
-        await msg.edit(content="Accessing Discord Files... [▓▓▓   ]")
-        await asyncio.sleep(2)
-        await msg.edit(content="Accessing Discord Files... [▓▓▓▓▓ ]")
-        await asyncio.sleep(2)
-        await msg.edit(content="Accessing Discord Files COMPLETE! [▓▓▓▓▓▓]")
-        await asyncio.sleep(2)
-        await msg.edit(content="Retrieving Login Info... [▓▓▓    ]")
-        await asyncio.sleep(3)
-        await msg.edit(content="Retrieving Login Info... [▓▓▓▓▓ ]")
-        await asyncio.sleep(3)
-        await msg.edit(content="Retrieving Login Info... [▓▓▓▓▓▓ ]")
-        await asyncio.sleep(4)
-        await msg.edit(content=f"An error has occurred hacking {user}'s account. Please try again later. ❌")
+
 
     
     
@@ -229,6 +211,15 @@ class fun:
         await x.edit(content='(╯°□°)╯    ]')
         await asyncio.sleep(0.2)
         await x.edit(content='(╯°□°)╯  ︵  ┻━┻')
+      
+      
+    @commands.command()
+    async def meme(self, ctx):
+        """Pulls a random meme from r/me_irl"""
+        async with aiohttp.ClientSession() as session:
+            async with session.get("https://api.reddit.com/r/me_irl/random") as r:
+                data = await r.json()
+                await ctx.send(data[0]["data"]["children"][0]["data"]["url"])
      
 
 
