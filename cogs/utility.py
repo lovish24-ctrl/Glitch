@@ -32,6 +32,13 @@ class utility:
 				image = await resp.read()
 		done = await ctx.guild.create_custom_emoji(name = name, image = image)
 		await ctx.send("Emoji {} created!".format(done))
+		
+	@commands.command()
+	async def avatar(self, ctx, user: discord.Member = None):
+        """Gets a avatar"""
+        if user == None:
+		user = ctx.author
+	await ctx.send(user.avatar_url)
 
 
 
