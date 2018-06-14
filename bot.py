@@ -12,7 +12,7 @@ import aiohttp
 from motor.motor_asyncio import AsyncIOMotorClient
 
 
-client = AsyncIOMotorClient(os.enviro.get("MONGOURL"))
+client = AsyncIOMotorClient(os.environ.get("MONGOURL"))
 db = client.discordbot2001
 bot.db = db
 
