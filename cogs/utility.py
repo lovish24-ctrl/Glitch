@@ -28,7 +28,6 @@ class utility:
 		'''add new emojis by url'''
 		async with self.bot.session.get(url) as resp:
 			image = await resp.read()
-				image = await resp.read()
 		done = await ctx.guild.create_custom_emoji(name = name, image = image)
 		await ctx.send("Emoji {} created!".format(done))
 		
