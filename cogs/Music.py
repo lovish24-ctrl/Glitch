@@ -398,4 +398,4 @@ class Music:
         Requires the `Manage Guild` permission.
         """
         ctx.music_state.min_skips = number
-        await self.bot.db.music.update_one({"gid" : ctx.guil.id}, {"$set" : {"minskips" : number}}, upsert = True)
+        await self.bot.db.music.update_one({"gid" : ctx.guild.id}, {"$set" : {"minskips" : number}}, upsert = True)
