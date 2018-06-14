@@ -31,10 +31,12 @@ async def guildpre(bot, message):
     '''Get the prefix for required guild'''
     f = await bot.db.config.find_one({"gid" : message.guild.id})
     if f is None:
-        return "e."
+       	return "e."
+        print("e.")
     else:
         f = f['prefix']
         return f
+        print(f)
 
 def cleanup_code(content):
     '''Automatically removes code blocks from the code.'''
