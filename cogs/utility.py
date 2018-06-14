@@ -37,6 +37,15 @@ class utility:
 		if user == None:
 			user = ctx.author
 		await ctx.send(user.avatar_url)
+		
+		
+		
+	@commands.command()
+	@commands.has_permissions(manage_guild = True)
+	async def changeprefix(self, ctx, prefix):
+		'''Change prefix of your bot in guild'''
+		await self.bot.db.config.update_one({"gid" : ctx.guild.id}, {"$set" : {"prefix" : prefix}})
+		ctx.send(f"New Prefix of {ctx.guild.name} is {prefix}, You can also change it again by doing {prefix}changeprefix <newprefix>.")
 
 
 
