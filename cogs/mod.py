@@ -97,7 +97,7 @@ class mod:
         """Deletes msgs."""
         x = int(x)
         await ctx.channel.purge(limit=x+1)
-        msg = await ctx.send(f"Deleted `{x + 1}` messages", delete_after = 5 )
+        msg = await ctx.send(f"Deleted `{x}` messages", delete_after = 5 )
 
 
 
