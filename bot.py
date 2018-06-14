@@ -24,6 +24,18 @@ bot._last_result = None
 bot.session = aiohttp.ClientSession(loop=bot.loop)
 bot.db = db
 
+
+
+
+async def guildpre(bot, message):
+    '''Get the prefix for required guild'''
+    f = await bot.db.config.find_one({"gid" : message.guild.id})
+    if f is None:
+        return "e."
+    else:
+        f = f['prefix']
+        return f
+
 def cleanup_code(content):
     '''Automatically removes code blocks from the code.'''
     # remove ```py\n```
