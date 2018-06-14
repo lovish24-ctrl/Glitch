@@ -365,7 +365,7 @@ class Music:
         ctx.music_state.volume = volume / 100
 
     @commands.command()
-    async def clear(self, ctx):
+    async def empty(self, ctx):
         """Clears the playlist."""
         ctx.music_state.playlist.clear()
 
