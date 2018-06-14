@@ -375,6 +375,8 @@ class Music:
 
         To configure the minimum number of votes needed, use `minskips`
         """
+        k = await self.bot.db.find_one({"gid" : ctx.guild.id})
+        minskips = k['minskips']
         if not ctx.music_state.is_playing():
             raise MusicError('Not playing anything to skip.')
 
@@ -386,7 +388,7 @@ class Music:
         await ctx.message.add_reaction('\N{WHITE HEAVY CHECK MARK}')
 
         # Check if the song has to be skipped
-        if len(ctx.music_state.skips) > ctx.music_state.min_skips or ctx.author == ctx.music_state.current_song.requester:
+        if len(ctx.music_state.skips) > minskips or ctx.author == ctx.music_state.current_song.requester:
             ctx.music_state.skips.clear()
             ctx.voice_client.stop()
 
