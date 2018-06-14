@@ -9,6 +9,12 @@ import io
 import textwrap
 import traceback
 import aiohttp
+from motor.motor_asyncio import AsyncIOMotorClient
+
+
+client = AsyncIOMotorClient(os.enviro.get("MONGOURL"))
+db = client.discordbot2001
+bot.db = db
 
 bot = commands.Bot(command_prefix='e.', description="An easy to use discord bot")
 bot.load_extension("cogs.fun")
