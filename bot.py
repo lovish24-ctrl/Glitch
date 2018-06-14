@@ -14,7 +14,7 @@ from motor.motor_asyncio import AsyncIOMotorClient
 
 client = AsyncIOMotorClient(os.environ.get("MONGOURL"))
 db = client.discordbot2001
-bot.db = db
+
 
 bot = commands.Bot(command_prefix='e.', description="An easy to use discord bot")
 bot.load_extension("cogs.fun")
@@ -22,6 +22,7 @@ bot.load_extension("cogs.utility")
 bot.load_extension("cogs.mod")
 bot._last_result = None
 bot.session = aiohttp.ClientSession(loop=bot.loop)
+bot.db = db
 
 def cleanup_code(content):
     '''Automatically removes code blocks from the code.'''
