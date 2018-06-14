@@ -38,7 +38,7 @@ async def on_ready():
 	print('Logged in as '+ bot.user.name)
 	print(bot.user.id)
 	print('------')
-	await bot.change_presence(status = os.environ.get("STATUS"), activity=discord.Game(name=os.environ.get('ACTIVITY')))
+	await bot.change_presence(status = discord.Status.idle, activity=discord.Game(name=os.environ.get('ACTIVITY')))
 
 
 
