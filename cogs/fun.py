@@ -3,6 +3,7 @@ import random
 import asyncio
 import json
 from discord.ext import commands
+import aiohttp
 
 
 
@@ -208,8 +209,17 @@ class fun:
         await x.edit(content='(°-°)\\ ┬─┬')
         await asyncio.sleep(1)
         await x.edit(content='(╯°□°)╯    ]')
-        await asyncio.sleep(0.2)
+         await asyncio.sleep(0.2)
         await x.edit(content='(╯°□°)╯  ︵  ┻━┻')
+      
+      
+    @commands.command()
+    async def meme(self, ctx):
+        """Pulls a random meme from r/me_irl"""
+        async with aiohttp.ClientSession() as session:
+            async with session.get("https://api.reddit.com/r/me_irl/random") as r:
+                data = await r.json()
+				        await ctx.send(data[0]["data"]["children"][0]["data"]["url"])
      
 
 
