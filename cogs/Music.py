@@ -375,11 +375,11 @@ class Music:
 
         To configure the minimum number of votes needed, use `minskips`
         """
-        k = await self.bot.db.music.find_one({"gid" : ctx.guild.id})
-        minskips = k['minskips']
+
         if not ctx.music_state.is_playing():
             raise MusicError('Not playing anything to skip.')
-
+        k = await self.bot.db.music.find_one({"gid" : ctx.guild.id})
+        minskips = k['minskips']
         if ctx.author.id in ctx.music_state.skips:
             raise MusicError(f'{ctx.author.mention} You already voted to skip that song')
 
