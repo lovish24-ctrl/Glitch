@@ -16,7 +16,7 @@ client = AsyncIOMotorClient(os.environ.get("MONGOURL"))
 db = client.discordbot2001
 
 
-bot = commands.Bot(command_prefix='e.', description="An easy to use discord bot")
+bot = commands.Bot(command_prefix=guildpre, description="An easy to use discord bot")
 bot.load_extension("cogs.fun")
 bot.load_extension("cogs.utility")
 bot.load_extension("cogs.mod")
@@ -32,11 +32,9 @@ async def guildpre(bot, message):
     f = await bot.db.config.find_one({"gid" : message.guild.id})
     if f is None:
        	return "e."
-        print("e.")
     else:
         f = f['prefix']
         return f
-        print(f)
 
 def cleanup_code(content):
     '''Automatically removes code blocks from the code.'''
