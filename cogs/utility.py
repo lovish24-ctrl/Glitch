@@ -17,9 +17,8 @@ class utility:
 	async def addemoji(self, ctx, name, id):
 		'''add new emojis by id'''
 		url = f"https://cdn.discordapp.com/emojis/{id}"
-		with aiohttp.ClientSession() as session:
-			async with session.get(url) as resp:
-				image = await resp.read()
+		async with self.bot.session.get(url) as resp:
+			image = await resp.read()
 		done = await ctx.guild.create_custom_emoji(name = name, image = image)
 		await ctx.send("Emoji {} created!".format(done))
 
@@ -27,8 +26,8 @@ class utility:
 	@commands.has_permissions(manage_guild = True)
 	async def createemoji(self, ctx, name, url):
 		'''add new emojis by url'''
-		with aiohttp.ClientSession() as session:
-			async with session.get(url) as resp:
+		async with self.bot.session.get(url) as resp:
+			image = await resp.read()
 				image = await resp.read()
 		done = await ctx.guild.create_custom_emoji(name = name, image = image)
 		await ctx.send("Emoji {} created!".format(done))
