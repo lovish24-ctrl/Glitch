@@ -10,6 +10,7 @@ class mod:
  
 
 
+
     @commands.command()
     @commands.has_permissions(kick_members = True)
     async def mute(self, ctx, user : discord.User, time = None):
