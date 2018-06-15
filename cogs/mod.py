@@ -23,7 +23,7 @@ class mod:
             await ctx.channel.set_permissions(user, send_messages=True)
         else:
             await ctx.channel.set_permissions(user, send_messages=False)
-            ctx.send(f"Done, {user.mention} is now permanently muted.")
+            await ctx.send(f"Done, {user.mention} is now permanently muted.")
     @commands.command()
     @commands.has_permissions(ban_members=True)
     async def unmute(self, ctx, user: discord.Member):
@@ -61,18 +61,19 @@ class mod:
         '''OFC kick anyone'''
         if reason != None:
             await ctx.send(f"Done, {user.mention} is kicked, reason = {reason} ")
-            await ctx.guild.kick(user, reason = reason)
+            
             embed=discord.Embed(title=f"Kicked From {ctx.author.guild.name}", description =f"You have been kicked from **{ctx.author.guild.name}** by **{ctx.message.author.name}**, Reason ==> **{reason}**!",  color=0xf52338)
             await user.send(embed=embed)
+            await ctx.guild.kick(user, reason = reason)
 
             
         else:
             reason = "Unspecified"
             await ctx.send(f"Done, {user} is kicked, reason = Unspecified ")
-            await ctx.guild.kick(user, reason = reason)
+            
             embed=discord.Embed(title=f"Kicked From {ctx.author.guild.name}", description = f"You have been kicked from **{ctx.author.guild.name}** by **{ctx.message.author.name}**, Reason ==> **Not Specified**!", color=0xf52338)
             await user.send(embed=embed)
-
+            await ctx.guild.kick(user, reason = reason)
             
         
 
@@ -80,17 +81,18 @@ class mod:
     @commands.has_permissions(ban_members = True)
     async def ban(self, ctx, user : discord.User, *, reason = None):
         if reason != None:
-            await ctx.guild.ban(user, reason = reason)
+            
             await ctx.send(f"Done, {user} is banned, reason = {reason} ")
             embed=discord.Embed(title=f"Banned From {ctx.author.guild.name}", description = f"You have been Banned from **{ctx.author.guild.name}** by **{ctx.message.author.name}**, Reason ==> **{reason}**!", color=0xf52338)
             await user.send(embed=embed)
+            await ctx.guild.ban(user, reason = reason)
 
         else:
-            await ctx.guild.ban(user, reason = "Unspecified")
+            
             await ctx.send(f"Done, {user} is banned, reason = {reason} ")
             embed=discord.Embed(title=f"Banned From {ctx.author.guild.name}",description = f"You have been Banned from **{ctx.author.guild.name}** by **{ctx.message.author.name}**, Reason ==> **Not Specified**!", color=0xf52338)
             await user.send(embed=embed)
-            
+            await ctx.guild.ban(user, reason = "Unspecified")
     
 
     @commands.command()
