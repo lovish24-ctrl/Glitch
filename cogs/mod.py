@@ -51,27 +51,28 @@ class mod:
     @commands.has_permissions(kick_members = True)
     async def warn(self, ctx, user: discord.Member, *, reason):
         """Sends that warning."""
-        embed = discord.Embed(color=0xf52338, title=f"WARNING: by {ctx.message.author.name} from **{ctx.author.guild.name}**.", description=f" Reason ==> {reason}")
+        embed = discord.Embed(color=0xf52338, title=f"WARNING From {ctx.author.guild.name}**.", description=f"By ctx.author.name \n Reason ==> {reason}")
         await user.send(embed=embed)
-        await ctx.message.delete
+        await ctx.message.delete()
 
     @commands.command()
     @commands.has_permissions(kick_members = True)
     async def kick(self, ctx, user : discord.Member, *, reason = None):
         '''OFC kick anyone'''
         if reason != None:
-            await ctx.send(f"Done, {user} is kicked, reason = {reason} ")
-            embed=discord.Embed(title=f"Kicked From **{ctx.author.guild.name}**", color=0xf52338)
-            embed.set_author(name=f"You have been kicked from **{ctx.author.guild.name}** by **{ctx.message.author.name}**, Reason ==> **{reason}**!")
-            await user.send(embed=embed)
+            await ctx.send(f"Done, {user.mention} is kicked, reason = {reason} ")
             await ctx.guild.kick(user, reason = reason)
+            embed=discord.Embed(title=f"Kicked From {ctx.author.guild.name}", description =f"You have been kicked from **{ctx.author.guild.name}** by **{ctx.message.author.name}**, Reason ==> **{reason}**!",  color=0xf52338)
+            await user.send(embed=embed)
+
             
         else:
+            reason = "Unspecified"
             await ctx.send(f"Done, {user} is kicked, reason = Unspecified ")
-            embed=discord.Embed(title=f"Kicked From **{ctx.author.guild.name}**", color=0xf52338)
-            embed.set_author(name=f"You have been kicked from **{ctx.author.guild.name}** by **{ctx.message.author.name}**, Reason ==> **Not Specified**!")
-            await user.send(embed=embed)
             await ctx.guild.kick(user, reason = reason)
+            embed=discord.Embed(title=f"Kicked From {ctx.author.guild.name}", description = f"You have been kicked from **{ctx.author.guild.name}** by **{ctx.message.author.name}**, Reason ==> **Not Specified**!", color=0xf52338)
+            await user.send(embed=embed)
+
             
         
 
@@ -79,17 +80,17 @@ class mod:
     @commands.has_permissions(ban_members = True)
     async def ban(self, ctx, user : discord.User, *, reason = None):
         if reason != None:
-            await ctx.send(f"Done, {user} is banned, reason = {reason} ")
-            embed=discord.Embed(title=f"Banned From **{ctx.author.guild.name}**", color=0xf52338)
-            embed.set_author(name=f"You have been Banned from **{ctx.author.guild.name}** by **{ctx.message.author.name}**, Reason ==> **{reason}**!")
-            await user.send(embed=embed)
             await ctx.guild.ban(user, reason = reason)
+            await ctx.send(f"Done, {user} is banned, reason = {reason} ")
+            embed=discord.Embed(title=f"Banned From {ctx.author.guild.name}", description = f"You have been Banned from **{ctx.author.guild.name}** by **{ctx.message.author.name}**, Reason ==> **{reason}**!", color=0xf52338)
+            await user.send(embed=embed)
+
         else:
+            await ctx.guild.ban(user, reason = "Unspecified")
             await ctx.send(f"Done, {user} is banned, reason = {reason} ")
-            embed=discord.Embed(title=f"Banned From **{ctx.author.guild.name}**", color=0xf52338)
-            embed.set_author(name=f"You have been Banned from **{ctx.author.guild.name}** by **{ctx.message.author.name}**, Reason ==> **Not Specified**!")
+            embed=discord.Embed(title=f"Banned From {ctx.author.guild.name}",description = f"You have been Banned from **{ctx.author.guild.name}** by **{ctx.message.author.name}**, Reason ==> **Not Specified**!", color=0xf52338)
             await user.send(embed=embed)
-            await ctx.guild.ban(user, reason = reason)
+            
     
 
     @commands.command()
