@@ -36,6 +36,7 @@ pycparser
 PyNaCl
 requests
 six
+pillow
 smmap2
 urllib3
 websockets
